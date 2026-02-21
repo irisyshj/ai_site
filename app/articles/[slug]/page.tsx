@@ -65,7 +65,23 @@ export default async function ArticlePage({ params }: { params: { slug: string }
   }
 
   // Process markdown content - convert to HTML-like structure
-  const processedContent = bodyContent
+  // First, remove Obsidian SVG data URI images and replace with proper paths
+  let processedContent = bodyContent;
+
+  // Handle images with Obsidian SVG data URIs containing Pasted image
+  processedContent = processedContent.replace(
+    /!\[([^\]]*)\]\(data:image\/svg\+xml[^\]]*?Pasted image (\d+)\.png[^\]]*?\)/g,
+    (match: string, alt: string, imgNum: string) => `<img src="/images/Pasted image ${imgNum}.png" alt="${alt}" class="rounded-lg my-4 max-w-full h-auto" />`
+  );
+
+  // Remove remaining data URI images (non-Pasted image or malformed)
+  processedContent = processedContent.replace(
+    /!\[([^\]]*)\]\(data:image\/svg\+xml[^\]]*\)/g,
+    ''
+  );
+
+  // Now process the remaining markdown
+  processedContent = processedContent
     // Handle headings
     .replace(/^### (.*$)/gim, '<h3 class="text-xl font-semibold mt-6 mb-3">$1</h3>')
     .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold mt-8 mb-4">$1</h2>')
@@ -76,15 +92,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     // Handle links
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>')
-    // Handle images - convert Obsidian-style and regular markdown images
+    // Handle other regular images
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
-      // Check if it's a data URI (invalid SVG placeholder)
-      if (src.startsWith('data:')) {
-        return `<img src="/images/placeholder.png" alt="${alt}" class="rounded-lg my-4 max-w-full h-auto" />`;
-      }
-      // Convert Obsidian-style paths
-      const cleanSrc = src.replace(/^.*\\(Pasted image.+)$/, '/images/$1');
-      return `<img src="${cleanSrc}" alt="${alt}" class="rounded-lg my-4 max-w-full h-auto" />`;
+      return `<img src="${src}" alt="${alt}" class="rounded-lg my-4 max-w-full h-auto" />`;
     })
     // Handle blockquotes
     .replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-primary pl-4 italic my-4 text-muted-foreground">$1</blockquote>')

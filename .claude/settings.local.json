@@ -38,7 +38,11 @@
       "Bash(git push:*)",
       "Bash(npx:*)",
       "Bash(npm install:*)",
-      "Bash(git config http.postBuffer 524288000 && git push origin main 2>&1)"
+      "Bash(git config http.postBuffer 524288000 && git push origin main 2>&1)",
+      "Bash(cat:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(node:*)"
     ]
   }
 }
