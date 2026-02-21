@@ -1,0 +1,8 @@
+{
+  "templatesFolder": "articles/_templates",
+  "dateFormat": "YYYY-MM-DD",
+  "timeFormat": "HH:mm",
+  "newFileFormat": "article-YYYY-MM-DD",
+  "templateFileOnNewFile": "article-template.md",
+  "enableSystemTemplates": true
+}

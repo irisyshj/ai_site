@@ -75,6 +75,7 @@ export function AIChatWidget({
   const [isOpen, setIsOpen] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
   const [hasBeenOpened, setHasBeenOpened] = React.useState(false);
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   // Check if AI chat is enabled
   const enabled = React.useMemo(() => isAIChatEnabled(), []);
@@ -96,6 +97,8 @@ export function AIChatWidget({
 
   const handleClose = React.useCallback(() => {
     setIsOpen(false);
+    // Return focus to the button when closing
+    buttonRef.current?.focus();
   }, []);
 
   // Handle escape key to close
@@ -128,10 +131,10 @@ export function AIChatWidget({
 
     switch (icon) {
       case 'message':
-        return <MessageCircle className="h-6 w-6" />;
+        return <MessageCircle className="h-6 w-6" aria-hidden="true" />;
       case 'bot':
       default:
-        return <Bot className="h-6 w-6" />;
+        return <Bot className="h-6 w-6" aria-hidden="true" />;
     }
   };
 
@@ -139,6 +142,7 @@ export function AIChatWidget({
     <>
       {/* Floating Action Button */}
       <button
+        ref={buttonRef}
         onClick={handleOpen}
         className={cn(
           positionClasses,
@@ -148,7 +152,7 @@ export function AIChatWidget({
           'shadow-lg hover:shadow-xl',
           'transition-all duration-300',
           'hover:scale-110 active:scale-95',
-          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+          'focus:outline-none focus:ring-4 focus:ring-ring/50',
           // Pulse animation
           showPulse && !hasBeenOpened && 'animate-pulse-subtle'
         )}
@@ -158,7 +162,8 @@ export function AIChatWidget({
           zIndex,
         }}
         aria-label={label}
-        title={tooltip}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
       >
         {/* Pulse ring effect */}
         {showPulse && !hasBeenOpened && (
@@ -166,50 +171,19 @@ export function AIChatWidget({
             className={cn(
               'absolute inset-0 rounded-full bg-primary/50',
               'animate-ping',
-              'opacity-75'
+              'opacity-75',
+              'pointer-events-none'
             )}
             style={{ animationDuration: '2s' }}
+            aria-hidden="true"
           />
         )}
 
         <span className="relative z-10">{renderIcon()}</span>
       </button>
 
-      {/* Tooltip */}
-      {tooltip && (
-        <span
-          className={cn(
-            positionClasses,
-            'px-3 py-1.5 text-xs font-medium',
-            'bg-foreground text-background',
-            'rounded-md shadow-md',
-            'opacity-0 group-hover:opacity-100',
-            'transition-opacity duration-200',
-            'pointer-events-none',
-            'whitespace-nowrap',
-            // Position above the button
-            'translate-y-[-60px]'
-          )}
-          style={{
-            bottom: `${bottom + 56}px`,
-            [position === 'left' ? 'left' : 'right']: `${side}px`,
-            zIndex: zIndex - 1,
-          }}
-        >
-          {tooltip}
-          {/* Arrow */}
-          <span
-            className={cn(
-              'absolute top-full left-1/2 -translate-x-1/2',
-              'border-4 border-transparent',
-              'border-t-foreground'
-            )}
-          />
-        </span>
-      )}
-
       {/* Chat Modal */}
-      <AIChatModal open={isOpen} onOpenChange={setIsOpen} />
+      <AIChatModal open={isOpen} onOpenChange={setIsOpen} onClose={handleClose} />
     </>
   );
 }

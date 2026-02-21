@@ -39,3 +39,10 @@ nul
 con
 prn
 aux
+
+# Obsidian
+content/.obsidian/workspace
+content/.obsidian/workspace-mobile
+content/.obsidian/workspace.json backups
+content/.obsidian/.trash
+

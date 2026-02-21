@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "analyze": "ANALYZE=true next build",
+    "build:profile": "next build --profile",
+    "publish": "tsx scripts/publish.ts",
+    "optimize-images": "tsx scripts/optimize-images.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.5",
@@ -33,7 +40,9 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.21",
     "postcss": "^8",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

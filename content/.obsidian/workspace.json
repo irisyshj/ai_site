@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "trash": ".trash",
+  "userIgnoreFilters": {
+    "C:\\20_brand_site\\content\\.obsidian": {
+      "system": true
+    },
+    "C:\\20_brand_site\\content\\articles\\_templates": {
+      "system": true
+    }
+  },
+  "plugins": {
+    "plugins-overrides": {},
+    "plugins-enabled": {
+      "daily-notes": true,
+      "templates": true
+    }
+  },
+  "core": {
+    "plugins": [
+      "daily-notes",
+      "templates"
+    ],
+    "plugins-overrides": {},
+    "plugins-list-disabled": [],
+    "plugins-list-enabled": [
+      "daily-notes",
+      "templates"
+    ],
+    "alwaysUpdateLinks": true,
+    "showInlineTitle": true,
+    "showUnsupportedFiles": false,
+    "attachmentFolderPath": "assets/images",
+    "newFileLocation": "folder",
+    "newFileFolderPath": "articles",
+    "useMarkdownLinks": true,
+    "newLinkFormat": "shortest",
+    "promptDelete": true,
+    "readableLineLength": true,
+    "showLineNumber": false,
+    "spellcheck": true,
+    "spellcheckLanguages": [
+      "en-US"
+    ],
+    "vimMode": false,
+    "showFrontmatter": true,
+    "livePreview": true,
+    "strictLineBreaks": false
+  },
+  "workspace": {
+    "layout": {
+      "left-sidebar": {
+        "id": "left-sidebar",
+        "type": "sidebar",
+        "collapsed": false,
+        "width": 300,
+        "components": [
+          {
+            "id": "file-explorer",
+            "type": "file-explorer",
+            "width": 300,
+            "collapsed": false
+          },
+          {
+            "id": "search",
+            "type": "search",
+            "width": 300,
+            "collapsed": true
+          },
+          {
+            "id": "bookmarks",
+            "type": "bookmarks",
+            "width": 300,
+            "collapsed": true
+          }
+        ]
+      },
+      "main": {
+        "id": "main",
+        "type": "main",
+        "collapsed": false,
+        "components": [
+          {
+            "id": "markdown-view",
+            "type": "markdown-view",
+            "state": {
+              "source": true,
+              "mode": "source"
+            }
+          }
+        ]
+      },
+      "right-sidebar": {
+        "id": "right-sidebar",
+        "type": "sidebar",
+        "collapsed": true,
+        "width": 300
+      }
+    },
+    "active": "main",
+    "openFiles": [],
+    "lastOpenFiles": []
+  },
+  "view": {
+    "mode": "source",
+    "sourceMode": true
+  },
+  "editor": {
+    "spellcheck": true,
+    "wordWrap": true,
+    "lineNumbers": false,
+    "showInlineTitle": true,
+    "showFrontmatter": true,
+    "livePreview": true,
+    "fontSize": 16,
+    "fontFamily": "",
+    "lineHeight": 1.6,
+    "autoPairBrackets": true,
+    "autoPairMarkdownSyntax": true,
+    "foldHeading": true,
+    "foldIndent": true
+  },
+  "theme": "obsidian"
+}

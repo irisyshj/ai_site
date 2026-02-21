@@ -103,13 +103,11 @@ export function isValidIframeURL(url: string): boolean {
       return false;
     }
 
-    // Allow well-known AI chat platforms
+    // Allow well-known AI chat platforms - use exact match or endsWith check
+    // to prevent subdomain bypass attacks
     const allowedDomains = [
       'dify.ai',
-      'demo.dify.ai',
       'coze.com',
-      'www.coze.com',
-      // Users can add their custom domains via env var
     ];
 
     // If the URL matches an allowed domain or is from env var, it's valid
@@ -117,6 +115,7 @@ export function isValidIframeURL(url: string): boolean {
     if (envUrl) {
       try {
         const envParsed = new URL(envUrl);
+        // Exact hostname match to prevent subdomain bypass
         if (parsed.hostname === envParsed.hostname) {
           return true;
         }
@@ -125,7 +124,25 @@ export function isValidIframeURL(url: string): boolean {
       }
     }
 
-    return allowedDomains.some((domain) => hostname.endsWith(domain));
+    // Check exact match or direct domain match (not endsWith to prevent bypass)
+    // e.g., evil.com would match 'dify.ai' with endsWith, but not with exact match
+    return allowedDomains.some((domain) => {
+      // Allow exact match or direct subdomain of the allowed domain
+      // e.g., demo.dify.ai is OK, but dify.ai.evil.com is not
+      const parts = hostname.split('.');
+      const domainParts = domain.split('.');
+
+      // Check if hostname ends with the allowed domain and has valid structure
+      if (hostname === domain) return true;
+
+      // Allow subdomains: X.dify.ai is OK, but dify.ai.X is not
+      if (parts.length > domainParts.length) {
+        const suffix = parts.slice(-domainParts.length).join('.');
+        return suffix === domain;
+      }
+
+      return false;
+    });
   } catch {
     return false;
   }

@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <div className="flex flex-col">
       <HeroSection />
       <Separator />
       <AboutPreview />
@@ -14,6 +14,6 @@ export default function Home() {
       <FeaturedResources />
       <Separator />
       <CTASection />
-    </main>
+    </div>
   );
 }

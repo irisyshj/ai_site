@@ -25,7 +25,15 @@
       "Bash(cd \"C:/20_brand_site\" && npx tsc --noEmit 2>&1)",
       "Bash(tail:*)",
       "Bash(cd \"C:/20_brand_site\" && npm run build 2>&1)",
-      "Bash(cd \"C:/20_brand_site\" && rm -rf .next && npm run build 2>&1)"
+      "Bash(cd \"C:/20_brand_site\" && rm -rf .next && npm run build 2>&1)",
+      "Bash(cd C:/20_brand_site && npm run lint 2>&1)",
+      "Bash(cd C:\\\\20_brand_site:*)",
+      "Bash(echo Script executed:*)",
+      "Bash(npm run:*)",
+      "Bash(sleep 8:*)",
+      "Bash(netstat:*)",
+      "Bash(taskkill:*)",
+      "Bash(git add:*)"
     ]
   }
 }

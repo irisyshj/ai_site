@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { resources } from '@/data/resources';
 import { ResourceFilter } from '@/components/resources/ResourceFilter';
 import { ResourceGrid } from '@/components/resources/ResourceGrid';
 
 function ResourcesContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const typeParam = searchParams.get('type') as 'all' | 'article' | 'video' | 'pdf' | 'podcast' | 'tool' | null;
   const queryParam = searchParams.get('q') || '';
   const tagParam = searchParams.get('tag') || undefined;
@@ -25,24 +26,26 @@ function ResourcesContent() {
 
   const handleTypeChange = (newType: 'all' | 'article' | 'video' | 'pdf' | 'podcast' | 'tool') => {
     setActiveType(newType);
-    const url = new URL(window.location.href);
+    const params = new URLSearchParams(searchParams.toString());
     if (newType === 'all') {
-      url.searchParams.delete('type');
+      params.delete('type');
     } else {
-      url.searchParams.set('type', newType);
+      params.set('type', newType);
     }
-    window.history.pushState({}, '', url.toString());
+    const queryString = params.toString();
+    router.push(`/resources${queryString ? '?' + queryString : ''}`, { scroll: false });
   };
 
   const handleSearchChange = (newQuery: string) => {
     setSearchQuery(newQuery);
-    const url = new URL(window.location.href);
+    const params = new URLSearchParams(searchParams.toString());
     if (newQuery) {
-      url.searchParams.set('q', newQuery);
+      params.set('q', newQuery);
     } else {
-      url.searchParams.delete('q');
+      params.delete('q');
     }
-    window.history.pushState({}, '', url.toString());
+    const queryString = params.toString();
+    router.push(`/resources${queryString ? '?' + queryString : ''}`, { scroll: false });
   };
 
   return (

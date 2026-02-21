@@ -1,0 +1,7 @@
+{
+  "dailyNotesFolder": "articles/drafts",
+  "dateFormat": "YYYY-MM-DD",
+  "newFileLocation": "folder",
+  "templateFile": "articles/_templates/article-template.md",
+  "openDailyNoteOnStartup": false
+}

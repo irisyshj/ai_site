@@ -37,7 +37,11 @@ export function Footer() {
         <div className="flex flex-col items-center justify-between gap-4 py-8 md:flex-row">
           {/* Copyright */}
           <div className="flex flex-col items-center gap-1 md:items-start">
-            <Link href="/" className="text-lg font-semibold text-foreground">
+            <Link
+              href="/"
+              className="text-lg font-semibold text-foreground transition-colors hover:text-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-md px-1"
+              aria-label={`${siteConfig.name} - Home`}
+            >
               {siteConfig.name}
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -46,12 +50,15 @@ export function Footer() {
           </div>
 
           {/* Quick Links */}
-          <nav className="flex gap-6" aria-label="Footer navigation">
+          <nav
+            className="flex gap-6"
+            aria-label="Footer navigation"
+          >
             {quickLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-md px-1 py-0.5"
               >
                 {link.name}
               </Link>
@@ -60,6 +67,7 @@ export function Footer() {
 
           {/* Social Links */}
           <div className="flex items-center gap-4">
+            <span className="sr-only">Follow us on social media</span>
             {socialLinks
               .filter((link) => link.visible)
               .map((social) => {
@@ -72,10 +80,10 @@ export function Footer() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label={social.platform}
+                    className="text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-md p-1"
+                    aria-label={`Follow us on ${social.platform} (opens in new tab)`}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 );
               })}

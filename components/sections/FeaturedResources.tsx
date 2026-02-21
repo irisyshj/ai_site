@@ -1,5 +1,5 @@
 import { Container } from '@/components/layout/Container';
-import { ResourceCard } from '@/components/sections/ResourceCard';
+import { ResourceCard } from '@/components/resources/ResourceCard';
 import { resources } from '@/data/resources';
 
 const featuredResources = resources.filter((r) => r.featured);

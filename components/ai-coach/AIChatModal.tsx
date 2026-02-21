@@ -23,12 +23,14 @@ export interface AIChatModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title?: string;
+  onClose?: () => void;
 }
 
 export function AIChatModal({
   open,
   onOpenChange,
   title,
+  onClose,
 }: AIChatModalProps) {
   const [isLoading, setIsLoading] = React.useState(true);
   const [hasError, setHasError] = React.useState(false);
@@ -59,7 +61,8 @@ export function AIChatModal({
 
   const handleClose = React.useCallback(() => {
     onOpenChange(false);
-  }, [onOpenChange]);
+    onClose?.();
+  }, [onOpenChange, onClose]);
 
   // Handle escape key to close
   React.useEffect(() => {
