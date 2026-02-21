@@ -33,7 +33,11 @@
       "Bash(sleep 8:*)",
       "Bash(netstat:*)",
       "Bash(taskkill:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npx:*)",
+      "Bash(npm install:*)"
     ]
   }
 }
