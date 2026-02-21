@@ -6,14 +6,14 @@ export const resources: Resource[] = [
     title: '10分钟弄懂Claude Agent Team实战指南',
     description: '深入了解Claude Code的Agent Teams功能：三种工作模式对比、TMUX分屏配置、Token成本控制、Skills流程固化等实战技巧。',
     type: 'article',
-    url: 'https://github.com/irisyshj/ai_site',
+    url: '/articles/claude-agent-team-guide',
     tags: ['claude', 'agent-team', 'ai-development', 'tutorial'],
     datePublished: '2025-02-18',
     dateAdded: '2025-02-21',
     readingTime: 15,
     difficulty: 'intermediate',
     featured: true,
-    external: true
+    external: false
   },
   {
     id: 'getting-started-with-chatgpt',
