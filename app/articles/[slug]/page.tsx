@@ -69,9 +69,10 @@ export default async function ArticlePage({ params }: { params: { slug: string }
   let processedContent = bodyContent;
 
   // Handle images with Obsidian SVG data URIs containing Pasted image
+  // Filenames have been renamed from "Pasted image XXXXX.png" to "Pasted_image_XXXXX.png"
   processedContent = processedContent.replace(
     /!\[([^\]]*)\]\(data:image\/svg\+xml[^\]]*?Pasted image (\d+)\.png[^\]]*?\)/g,
-    (match: string, alt: string, imgNum: string) => `<img src="/images/Pasted image ${imgNum}.png" alt="${alt}" class="rounded-lg my-4 max-w-full h-auto" />`
+    (match: string, alt: string, imgNum: string) => `<img src="/images/Pasted_image_${imgNum}.png" alt="${alt}" class="rounded-lg my-4 max-w-full h-auto" />`
   );
 
   // Remove remaining data URI images (non-Pasted image or malformed)
